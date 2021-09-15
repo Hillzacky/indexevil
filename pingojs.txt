@@ -1,0 +1,44 @@
+function ping(cellPinged) {
+	var ajaxRequest;
+	var pingUrl = 'http://pingomatic.com/ping/?title=Pingtime&blogurl=' + urls[i] + '&rssurl=http%3A%2F%2F&chk_weblogscom=on&chk_blogs=on&chk_technorati=on&chk_feedburner=on&chk_syndic8=on&chk_newsgator=on&chk_myyahoo=on&chk_pubsubcom=on&chk_blogdigger=on&chk_blogrolling=on&chk_blogstreet=on&chk_moreover=on&chk_weblogalot=on&chk_icerocket=on&chk_newsisfree=on&chk_topicexchange=on&chk_google=on&chk_tailrank=on&chk_bloglines=on&chk_postrank=on&chk_skygrid=on&chk_bitacoras=on&chk_collecta=on';
+	try{
+		// Opera 8.0+, Firefox, Safari
+		ajaxRequest = new XMLHttpRequest();
+	} catch (e){
+		// Internet Explorer Browsers
+		try{
+			ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		} catch (e) {
+			try{
+				ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			} catch (e){
+				// Something went wrong
+				alert("Your browser broke, it doesn't support AJAX or something...");
+				return false;
+			}
+		}
+	}
+	// Create a function that will receive data sent from the server
+	ajaxRequest.onreadystatechange = function(){
+		if(ajaxRequest.readyState == 4) { //&& ajaxRequest.status == 200){
+			cellPinged.innerHTML = 'Yes';
+		}
+	}
+	ajaxRequest.open("GET", pingUrl, true);
+	ajaxRequest.send(null); 
+	
+	// Timeout to abort in 5 seconds
+	//var xhrTimeout=setTimeout(function(){ajaxRequest.abort(); cellPinged.innerHTML = 'No'; },35000);
+}
+
+
+
+VERSION BUILD=1010 RECORDER=CR
+
+URL GOTO=https://doge2moon.click/
+
+SET !LOOP -9999999
+TAG SELECTOR="HTML>BODY>DIV:nth-of-type(4)>DIV>DIV>DIV:nth-of-type(2)>DIV:nth-of-type(3)>BUTTON" CONTENT=Claim<SP>Block
+WAIT SECONDS=1
+TAG XPATH="//*[@id="modal-claim"]/form/button" CONTENT=Claim
+WAIT SECONDS=1800
